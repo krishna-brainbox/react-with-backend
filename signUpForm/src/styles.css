@@ -1,0 +1,68 @@
+/* Styling for the login form */
+form {
+  width: 300px;               /* Set a fixed width for the form */
+  margin: 100px auto;         /* Center the form horizontally and add some top margin */
+  padding: 20px;              /* Add padding inside the form */
+  background-color: #f9f9f9; /* Light background color */
+  border-radius: 8px;         /* Round the corners of the form */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  margin-left: 750px;
+}
+
+/* Styling for the form heading */
+h2 {
+  text-align: center;         /* Center the heading */
+  color: #333;                /* Set the text color */
+  font-family: 'Arial', sans-serif; /* Use a modern font */
+}
+
+/* Label styling */
+label {
+  display: block;             /* Make the labels block elements so they take up full width */
+  margin: 10px 0 5px;         /* Add margin between labels and inputs */
+  font-size: 14px;            /* Make the font size slightly smaller */
+  color: #555;                /* Slightly lighter text color */
+}
+
+/* Input field styling */
+input[type='email'],
+input[type='password'] {
+  width: 100%;                /* Make inputs fill the width of the form */
+  padding: 10px;              /* Add padding inside the input fields */
+  margin-bottom: 20px;        /* Space between input fields */
+  border: 1px solid #ccc;    /* Add a border around the inputs */
+  border-radius: 4px;         /* Round the corners of the inputs */
+  box-sizing: border-box;     /* Make sure padding doesn't affect the input's width */
+  font-size: 14px;            /* Set a smaller font size */
+}
+
+/* Button styling */
+button {
+  width: 100%;                /* Make the button fill the width of the form */
+  padding: 10px;              /* Add padding inside the button */
+  background-color: #4CAF50; /* Green background for the button */
+  color: white;               /* White text color */
+  border: none;               /* Remove the border */
+  border-radius: 4px;         /* Round the corners of the button */
+  font-size: 16px;            /* Set a larger font size for the button */
+  cursor: pointer;           /* Change the cursor to a pointer */
+  transition: background-color 0.3s ease; /* Add a smooth transition for background color */
+}
+
+button:hover {
+  background-color: #45a049;  /* Darker green on hover */
+}
+
+/* Link styling */
+a {
+  display: inline-block;      /* Make the link an inline block */
+  text-align: center;         /* Center the link */
+  margin-top: 10px;           /* Add some space above the link */
+  font-size: 14px;            /* Set a smaller font size */
+  color: #007BFF;             /* Blue color for the link */
+  text-decoration: none;      /* Remove the underline */
+}
+
+a:hover {
+  text-decoration: underline; /* Underline on hover */
+}
