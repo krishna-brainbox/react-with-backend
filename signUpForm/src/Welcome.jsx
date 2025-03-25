@@ -6,7 +6,8 @@ function Welcome() {
   return (
     <>
       <h1>Welcome to my page</h1>
-      <button onChange={()=>navigate(-1)}> Go back </button>
+      <button onClick={()=>navigate(-1)}> Go back </button>
+      <Link to="/delete-account">Delete account</Link>
     </>
   )
 }

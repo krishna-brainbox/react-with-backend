@@ -44,10 +44,15 @@ function Login() {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   const handleSubmit = async () => {
     if (!formData.email || !formData.password) {
       alert("Please fill in all fields.");
+      return;
+    }
+    if (!emailRegex.test(formData.email)) {
+      alert("Invalid email format.");
       return;
     }
     try {
@@ -81,6 +86,7 @@ function Login() {
       />
       <button onClick={handleSubmit}>Submit</button>
       <p>Don't have an account? <Link to="/signup">Sign Up</Link></p>
+      <Link to="/delete-account">Delete account</Link>
     </div>
   );
 }
