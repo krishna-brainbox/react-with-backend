@@ -38,21 +38,28 @@ import axios from 'axios';
 
 function Login() {
   const [formData, setFormData] = useState({ email: '', password: '' });
+  const [errors, setErrors] = useState({ email: "", password: "" });
   const navigate = useNavigate();
 
   // Handle changes to form fields
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setErrors({ ...errors, [e.target.name]: "" });
   };
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   const handleSubmit = async () => {
+    let newErrors = {};
     if (!formData.email || !formData.password) {
       alert("Please fill in all fields.");
       return;
     }
     if (!emailRegex.test(formData.email)) {
-      alert("Invalid email format.");
+      newErrors.email = "Invalid email format";
+      return;
+    }
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
       return;
     }
     try {
@@ -61,12 +68,13 @@ function Login() {
       console.log(response)
       navigate('/welcome');
     } catch (error) {
-      alert('Invalid credentials or something went wrong' + error);
+      setErrors({ email: "Invalid credentials", password: "" });
+      console.log(error);
     }
   };
 
   return (
-    <div>
+    <div className="login-container">
       <h2>Login</h2>
       <label htmlFor="email">Email: </label>
       <input
@@ -76,6 +84,7 @@ function Login() {
         value={formData.email}
         onChange={handleChange}
       />
+      {errors.email && <p className="error-text">{errors.email}</p>}
       <label htmlFor="password">Password: </label>
       <input
         type="password"

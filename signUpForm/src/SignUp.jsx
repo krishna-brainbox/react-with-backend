@@ -38,20 +38,22 @@ function Signup() {
       await axios.post('http://localhost:5000/signup', formData);
       navigate('/welcome');
     } catch (error) {
-      alert('Error creating account'+ error);
+      setErrors({ email: "Invalid credentials", password: "" });
+      console.log(error);
     }
   };
   return (
-    <>
+    <div className="signup-container">
       <h2> Signup </h2>
       <label htmlFor='email'>Email : </label>
       <input type='email' placeholder='abc@mail.com' name='email' id='email' value={formData.email} onChange={handleChange} />
       {errors.email && <p className="error-text">{errors.email}</p>}
       <label htmlFor='password'>Password : </label>
       <input type='password' name='password' id='password' value={formData.password} onChange={handleChange} />
+      {errors.password && <p className="error-text">{errors.password}</p>}
       <button type="submit" onClick={handleSubmit}>Submit</button>
       <label>Alrerady have an account?</label> <Link to='/login'>Login</Link>
-    </>
+    </div>
   )
 }
 
