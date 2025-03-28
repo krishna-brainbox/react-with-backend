@@ -19,13 +19,9 @@ function Signup() {
 
   const handleSubmit = async () => {
     let newErrors = {};
-    if (!formData.email || !formData.password) {
-      alert("Please fill in all fields.");
-      return;
-    }
-    if (!emailRegex.test(formData.email)) {
-      newErrors.email = "Invalid email format";
-    }
+    if (!formData.email) newErrors.email = "Email is required";
+    if (!formData.password) newErrors.password = "Password is required";
+    if (!emailRegex.test(formData.email)) newErrors.email = "Invalid email format";
 
     if (!passwordRegex.test(formData.password)) {
       newErrors.password = "Password must be at least 8 characters long, include one letter, one number, and one special character.";
@@ -36,10 +32,11 @@ function Signup() {
     }
     try {
       await axios.post('http://localhost:5000/signup', formData);
+      setErrors({});
       navigate('/welcome');
     } catch (error) {
-      setErrors({ email: "Invalid credentials", password: "" });
-      console.log(error);
+      setErrors({ email: "Invalid credentials", password: "Invalid credentials" });
+      console.error(error);
     }
   };
   return (

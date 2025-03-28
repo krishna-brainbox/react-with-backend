@@ -4,18 +4,22 @@ import axios from 'axios';
 
 function DeleteAccount() {
   const [formData, setFormData] = useState({ email: '', password: '' });
+  const [errors, setErrors] = useState({ email: "", password: "" });
   const navigate = useNavigate();
 
   // Handle changes to form fields
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setErrors({ ...errors, [e.target.name]: "" });
   };
 
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
   const handleDelete = async () => {
-    if (!formData.email || !formData.password) {
-      alert("Please fill in all fields.");
-      return;
-    }
+    let newErrors = {};
+    if (!formData.email) newErrors.email = "Email is required";
+    if (!formData.password) newErrors.password = "Password is required";
+    if (!emailRegex.test(formData.email)) newErrors.email = "Invalid email format";
 
     try {
       await axios.post('http://localhost:5000/delete-account', formData);

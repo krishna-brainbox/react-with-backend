@@ -50,26 +50,24 @@ function Login() {
 
   const handleSubmit = async () => {
     let newErrors = {};
-    if (!formData.email || !formData.password) {
-      alert("Please fill in all fields.");
-      return;
-    }
-    if (!emailRegex.test(formData.email)) {
-      newErrors.email = "Invalid email format";
-      return;
-    }
+    
+    if (!formData.email) newErrors.email = "Email is required";
+    if (!formData.password) newErrors.password = "Password is required";
+    if (!emailRegex.test(formData.email)) newErrors.email = "Invalid email format";
+  
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
+  
     try {
       const response = await axios.post('http://localhost:5000/login', formData);
-      localStorage.setItem('token', response.data.token);  // Save JWT token
-      console.log(response)
+      localStorage.setItem('token', response.data.token);
+      setErrors({}); // Clear errors on success
       navigate('/welcome');
     } catch (error) {
-      setErrors({ email: "Invalid credentials", password: "" });
-      console.log(error);
+      setErrors({ email: "Invalid credentials", password: "Invalid credentials" });
+      console.error(error);
     }
   };
 
@@ -93,6 +91,7 @@ function Login() {
         value={formData.password}
         onChange={handleChange}
       />
+      {errors.password && <p className="error-text">{errors.password}</p>}
       <button onClick={handleSubmit}>Submit</button>
       <p>Don't have an account? <Link to="/signup">Sign Up</Link></p>
       <Link to="/delete-account">Delete account</Link>
